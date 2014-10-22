@@ -15,14 +15,13 @@
         <h1>Login</h1>
         
         <%
-            String usr_form = "", psw_form = "", usr_ok = "ldiez", psw_ok = "ldiez";
+            String usr_form = "", pwd_form = "", usr_ok = "ldiez", pwd_ok = "ldiez";
             if(request.getParameter("signin") != null)
             {
                 usr_form = request.getParameter("user");
-                psw_form = request.getParameter("pass");
+                pwd_form = request.getParameter("pass");
                 
-                out.print(usr_form == usr_ok);
-                if(usr_ok == usr_form && psw_form == psw_ok)
+                if(request.getParameter("user").equals(usr_ok) && request.getParameter("pass").equals(pwd_ok))
                 {
                     out.print("Usuario y clave correctos!!!");
                 }
@@ -35,7 +34,7 @@
         
         <form name="login" action="login.jsp" method="POST">
             Usuario: &nbsp;<input type="text" name="user" value="<% out.print(usr_form); %>" /><br />
-            Contraseña: &nbsp;<input type="password" name="pass" value="<% out.print(psw_form); %>" /><br />
+            Contraseña: &nbsp;<input type="password" name="pass" value="<% out.print(pwd_form); %>" /><br />
             <input type="submit" name="signin" value="Ingresar" />
         </form>
     </body>

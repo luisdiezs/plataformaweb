@@ -4,6 +4,7 @@
     Author     : ldiez
 --%>
 
+<%@page import="packageClass.functionsDB" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,15 @@
         <title>Sistema de ventas de paquetes turísticos</title>
     </head>
     <body>
+        
+        <%
+            functionsDB db = new functionsDB();
+            db.connect();
+            String usuario = db.get_usuarios();
+            out.print(usuario);
+        %>
+        
         <h1>Hello World!</h1>
-        <jsp:include page="login.jsp" flush="true" />
+        <% /* <jsp:include page="login.jsp" flush="true" /> */ %>
     </body>
 </html>
