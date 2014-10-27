@@ -17,11 +17,19 @@
         <div class="container demo-2">
             <header class="clearfix">
                 <h1>Responsive Multi-Level Menu <span>Space-saving drop-down menu with subtle effects</span></h1>
-                <form name="login" action="login" method="POST">
-                    Usuario: &nbsp;<input type="text" name="user" value="" /><br />
-                    Contraseña: &nbsp;<input type="password" name="pass" value="" /><br />
-                    <input type="submit" name="signin" value="Ingresar" />
-                </form>
+                <div class="login">
+                    <form name="login" action="login" method="POST">
+                        <div class="avatar">
+                            <img src="/<% out.print(config_motor.getString("base_path")); %>/assets/images/login-icon.png">
+                        </div>
+                        <input type="text" name="user" placeholder="usuario" required />
+                        <div class="bar">
+                        <i></i>
+                        </div>
+                        <input type="password" name="pass" placeholder="contraseña" required />
+                        <input class="submit" type="submit" name="signin" value="Ingresar" />
+                    </form>
+                </div>
             </header>
         </div><!-- /container -->
         <%@ include file="/WEB-INF/views/common/footer_scripts.jsp" %>
