@@ -40,16 +40,32 @@ public class login extends HttpServlet {
 
             //HttpSession sesion = request.getSession();
             String user = "", pass = "";
-            if(request.getParameter("singin") != null)
+            if(request.getParameter("signin") != null)
             {
                 user = request.getParameter("user");
                 pass = request.getParameter("pass");
             }
             
-            if(db.login(user, pass))
-                response.sendRedirect("reservas.jsp");
-            else
-                response.sendRedirect("");
+            String response_login = db.login(user, pass);
+            out.println(response_login);
+            String msg_error_usr = "", msg_error_pwd = "";
+            
+            switch (response_login)
+            {
+                case "-1":
+                    msg_error_usr = "USUARIO no existe";
+                    request.setAttribute("msg_error_usr", msg_error_usr);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    break;
+                case "0":
+                    msg_error_pwd = "CLAVE incorrecta";
+                    request.setAttribute("msg_error_pwd", msg_error_pwd);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    break;
+                case "1":
+                    response.sendRedirect("reservas.jsp");
+                    break;
+            }
         
             /*out.println("<!DOCTYPE html>");
             out.println("<html>");

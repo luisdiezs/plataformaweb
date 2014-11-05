@@ -42,21 +42,27 @@ public class mgeneral {
         }
     }
     
-    public boolean login(String user, String pass)
+    public String login(String user, String pass)
     {
-        try { 
+        String response;
+        try {
             rs = st.executeQuery("select * from usuarios where usuario = '" + user + "' limit 1");
             rs.first();
-            String id_db = rs.getString(1);
-            String usr_db = rs.getString(2);
-            String pwd_db = rs.getString(3);
+            int id_db = rs.getInt("id");
+            String usr_db = rs.getString("usuario");
+            String pwd_db = rs.getString("clave");
             
-            return pwd_db.equals(pass);
+            if(pass.equals(pwd_db))
+                response = "1";
+            else
+                response = "0";
         
         } catch(SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            response = "-1";
         }
+        
+        return response;
     }
     
 }
