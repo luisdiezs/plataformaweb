@@ -12,6 +12,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -42,18 +44,21 @@ public class mgeneral {
         }
     }
     
-    public String login(String user, String pass)
+    public String login(String user, String pass, HttpServletRequest request)
     {
         String response;
         try {
-            rs = st.executeQuery("select * from usuarios where usuario = '" + user + "' limit 1");
+            rs = st.executeQuery("select * from tbl_usuario where usuario = '" + user + "' limit 1");
             rs.first();
-            int id_db = rs.getInt("id");
-            String usr_db = rs.getString("usuario");
-            String pwd_db = rs.getString("clave");
+            String usuario = rs.getString("nombre") + rs.getString("apellido");
             
-            if(pass.equals(pwd_db))
+            HttpSession session = request.getSession(true);
+            
+            if(pass.equals(rs.getString("clave")))
+            {
                 response = "1";
+                session.setAttribute("usuario", usuario);
+            }
             else
                 response = "0";
         

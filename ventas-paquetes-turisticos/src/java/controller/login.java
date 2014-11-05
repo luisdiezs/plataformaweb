@@ -38,18 +38,15 @@ public class login extends HttpServlet {
             mgeneral db = new mgeneral();
             db.conectar();
 
-            //HttpSession sesion = request.getSession();
-            String user = "", pass = "";
+            String user = "", pass = "", msg_error_usr = "", msg_error_pwd = "";
+            
             if(request.getParameter("signin") != null)
             {
                 user = request.getParameter("user");
                 pass = request.getParameter("pass");
             }
             
-            String response_login = db.login(user, pass);
-            out.println(response_login);
-            String msg_error_usr = "", msg_error_pwd = "";
-            
+            String response_login = db.login(user, pass, request);            
             switch (response_login)
             {
                 case "-1":
@@ -66,16 +63,6 @@ public class login extends HttpServlet {
                     response.sendRedirect("reservas.jsp");
                     break;
             }
-        
-            /*out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet login</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet login at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");*/
         }
     }
 

@@ -4,10 +4,7 @@
     Author     : ldiez
 --%>
 
-<%@page import="java.util.ResourceBundle" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<% ResourceBundle config_motor = ResourceBundle.getBundle("config_motor"); %>
+<%@ include file="/WEB-INF/imports.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en" class="no-js">
