@@ -104,3 +104,42 @@ login .bar i {
 	border-bottom: 3px solid #307d63;
 	cursor: pointer;
 }
+
+/*** formulario reservas ***/
+.datos-turista .fila {
+    width: 100%;
+    text-align: center;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.datos-turista .texto {
+    text-align: right;
+    float: left;
+    width: 50%;
+    padding-right: 20px;
+}
+
+.datos-turista .campo {
+    text-align: left;
+    float: left;
+    width: 50%;
+}
+
+select, input[type="text"] {
+    width: 160px;
+    box-sizing: border-box;
+}
+section {
+    padding: 8px;
+    background-color: #f0f0f0;
+    overflow: auto;
+}
+section > div {
+    float: left;
+    padding: 4px;
+}
+section > div + div {
+    width: 40px;
+    text-align: center;
+}

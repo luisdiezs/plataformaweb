@@ -9,6 +9,6 @@
     <link rel="shortcut icon" href="../favicon.ico"> 
     <link rel="stylesheet" type="text/css" href="/<% out.print(config_motor.getString("base_path")); %>/assets/css/default.css" />
     <link rel="stylesheet" type="text/css" href="/<% out.print(config_motor.getString("base_path")); %>/assets/css/component.css" />
-    <link rel="stylesheet" type="text/css" href="/<% out.print(config_motor.getString("base_path")); %>/assets/css/form_login.css" />
+    <link rel="stylesheet" type="text/css" href="/<% out.print(config_motor.getString("base_path")); %>/assets/css/form.css" />
     <script src="/<% out.print(config_motor.getString("base_path")); %>/assets/js/modernizr.custom.js"></script>
 </head>
