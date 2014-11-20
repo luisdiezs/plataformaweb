@@ -212,3 +212,7 @@ nav.bt-menu  ul li a:hover, nav ul li.current  {
 	display: none;
 }
 
+li.bt-icon {
+	width: 100px;
+}
+
