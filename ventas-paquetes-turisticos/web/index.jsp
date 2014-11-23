@@ -8,35 +8,49 @@
 
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-    <%@ include file="/WEB-INF/views/common/head.jsp" %>
-    <body>
-        <%@ include file="/WEB-INF/views/common/menu.jsp" %>
-        <div class="container demo-2">
-            <header class="clearfix">
-                <h1>Responsive Multi-Level Menu <span>Space-saving drop-down menu with subtle effects</span></h1>
-            </header>
-            
-            <div class="login">
+    <%@ include file="/WEB-INF/views/head.jsp" %>
+    <body id="home">
+        <%@ include file="/WEB-INF/views/header.jsp" %>
                     
-                <% 
-                String msg_error_usr = (String)request.getAttribute("msg_error_usr");
-                String msg_error_pwd = (String)request.getAttribute("msg_error_pwd");
-                %>
-
-                <form name="login" action="login" method="POST">
-                    <div class="avatar">
-                        <img src="/<% out.print(config_motor.getString("base_path")); %>/assets/images/login-icon.png">
-                    </div>
-                    <input type="text" name="user" placeholder="<%= (msg_error_usr != null) ? msg_error_usr : "usuario" %>" required <%= (msg_error_usr != null) ? "class=\"msg_error\"" : "" %>/>
-                    <div class="bar">
-                    <i></i>
-                    </div>
-                    <input type="password" name="pass" placeholder="<%= (msg_error_pwd != null) ? msg_error_pwd : "clave" %>" required <%= (msg_error_pwd != null) ? "class=\"msg_error\"" : "" %>/>
-                    <input class="submit" type="submit" name="signin" value="Ingresar" />
-                </form>
-            </div>
-                        
-        </div><!-- /container -->
-        <%@ include file="/WEB-INF/views/common/footer_scripts.jsp" %>
+        <% 
+        String msg_error_usr = (String)request.getAttribute("msg_error_usr");
+        String msg_error_pwd = (String)request.getAttribute("msg_error_pwd");
+        %>
+        
+        <div class="content">
+			<form action="login" method="POST" class="sky-form">
+				<!-- <header>Login form</header> -->
+				
+				<fieldset>					
+					<section>
+						<div class="row">
+							<label class="label col col-4">Usuario</label>
+							<div class="col col-8">
+								<label class="input">
+									<i class="icon-append icon-user"></i>
+									<input type="text" name="user" />
+								</label>
+							</div>
+						</div>
+					</section>
+					
+					<section>
+						<div class="row">
+							<label class="label col col-4">Clave</label>
+							<div class="col col-8">
+								<label class="input">
+									<i class="icon-append icon-lock"></i>
+									<input type="password" name="pass" />
+								</label>
+							</div>
+						</div>
+					</section>
+				</fieldset>
+				<footer>
+                    <input class="button" type="submit" name="signin" value="Ingresar" />
+				</footer>
+			</form>
+		</div>
+        
     </body>
 </html>

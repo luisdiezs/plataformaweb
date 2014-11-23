@@ -253,7 +253,7 @@
 .ui-datepicker {
 	display: none;
 	padding: 10px 12px;
-	background: rgba(255,255,255,0.9);
+	background: rgba(255,255,255,1);
 	box-shadow: 0 0 10px rgba(0,0,0,.3);
 	font: 13px/1.55 'Open Sans', Helvetica, Arial, sans-serif;
 	text-align: center;
