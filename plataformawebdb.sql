@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-11-2014 a las 18:27:36
+-- Tiempo de generación: 24-11-2014 a las 15:29:24
 -- Versión del servidor: 5.5.40-0ubuntu0.14.04.1
 -- Versión de PHP: 5.5.9-1ubuntu4.5
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `plataformawebdb`
 --
-CREATE DATABASE IF NOT EXISTS `plataformawebdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `plataformawebdb`;
 
 -- --------------------------------------------------------
 
@@ -28,7 +26,6 @@ USE `plataformawebdb`;
 -- Estructura de tabla para la tabla `tbl_boleto`
 --
 
-DROP TABLE IF EXISTS `tbl_boleto`;
 CREATE TABLE IF NOT EXISTS `tbl_boleto` (
   `boleto_id` int(11) NOT NULL AUTO_INCREMENT,
   `reserva_id` int(11) NOT NULL,
@@ -46,7 +43,6 @@ CREATE TABLE IF NOT EXISTS `tbl_boleto` (
 -- Estructura de tabla para la tabla `tbl_cargo`
 --
 
-DROP TABLE IF EXISTS `tbl_cargo`;
 CREATE TABLE IF NOT EXISTS `tbl_cargo` (
   `cargo_id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_cargo` varchar(128) NOT NULL,
@@ -67,7 +63,6 @@ INSERT INTO `tbl_cargo` (`cargo_id`, `nombre_cargo`) VALUES
 -- Estructura de tabla para la tabla `tbl_config`
 --
 
-DROP TABLE IF EXISTS `tbl_config`;
 CREATE TABLE IF NOT EXISTS `tbl_config` (
   `param` varchar(64) NOT NULL,
   `value` varchar(64) NOT NULL
@@ -79,31 +74,58 @@ CREATE TABLE IF NOT EXISTS `tbl_config` (
 -- Estructura de tabla para la tabla `tbl_destino`
 --
 
-DROP TABLE IF EXISTS `tbl_destino`;
 CREATE TABLE IF NOT EXISTS `tbl_destino` (
   `destino_id` int(11) NOT NULL AUTO_INCREMENT,
   `destino` varchar(128) NOT NULL,
-  `descripcion` varchar(2048) NOT NULL,
-  `imagen` varchar(128) NOT NULL,
   PRIMARY KEY (`destino_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+
+--
+-- Volcado de datos para la tabla `tbl_destino`
+--
+
+INSERT INTO `tbl_destino` (`destino_id`, `destino`) VALUES
+(1, 'Plaza de Armas de San Ramón'),
+(2, 'Plaza de Armas de San Ramón'),
+(3, 'Catarata Tirol'),
+(4, 'Mariposario y mini Zoológico “Zhaveta Yard”'),
+(5, 'Comunidad Nativa Asháninka Pampa Michi'),
+(6, 'Planta lechera “La Floralp”'),
+(7, 'Tunki Cueva'),
+(8, 'Planta Artesanal “El Wharapo”'),
+(9, 'City tour Oxapampa'),
+(10, 'Puente Kimiri'),
+(11, 'Cataratas de Bayoz'),
+(12, 'Catarata Velo de la Novia'),
+(13, 'Cañon de Yurinaki'),
+(14, 'Planta Procesadora de Café');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_paqtour`
+-- Estructura de tabla para la tabla `tbl_paqtur`
 --
 
-DROP TABLE IF EXISTS `tbl_paqtour`;
-CREATE TABLE IF NOT EXISTS `tbl_paqtour` (
+CREATE TABLE IF NOT EXISTS `tbl_paqtur` (
   `paqtour_id` int(11) NOT NULL AUTO_INCREMENT,
   `destino_id` varchar(128) NOT NULL,
+  `nombre` varchar(512) NOT NULL,
+  `descripcion` varchar(1024) NOT NULL,
   `hora_inicio` time NOT NULL,
   `hora_fin` time NOT NULL,
   `precio` double NOT NULL,
   PRIMARY KEY (`paqtour_id`),
   KEY `paqtour_id` (`paqtour_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1001 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1004 ;
+
+--
+-- Volcado de datos para la tabla `tbl_paqtur`
+--
+
+INSERT INTO `tbl_paqtur` (`paqtour_id`, `destino_id`, `nombre`, `descripcion`, `hora_inicio`, `hora_fin`, `precio`) VALUES
+(1001, '1,2,3,4', 'San Ramón – Catarata de Tirol - Comunidad Nativa Ashaninka', 'Iniciamos nuestro recorrido visitando la plaza de Armas de San Ramón, caminata hacia la Catarata Tirol,  donde observaremos la flora y fauna de la zona y donde disfrutaremos de un refrescante baño. Visita al Mariposario y mini Zoológico “Zhaveta Yard”, Comunidad Nativa Asháninka Pampa Michi', '10:30:00', '19:30:00', 150),
+(1002, '5,6,7,8', 'Oxapampa – Tunki Cueva – El Wharapo', 'En el trayecto a la ciudad de Oxapampa atravesaremos el Distrito de San Luis de Shuaro. Puente Paucartambo (límite entre Junín y Pasco). Mirador de Mesapata desde todo se tendrá una vista panorámica del Valle de Paucartambo. Monumento de Bienvenida a la ciudad Geocéntrica del Perú. Visitaremos la Planta lechera “La Floralp”, después conoceremos la   Tunki Cueva en este lugar observaremos la formación de estalagmitas y estalactitas. Criadero de truchas, seguiremos nuestro recorrido hacia la Planta Artesanal   “El Wharapo” (degustación y compra). Para culminar nuestro día haremos un city tour conociendo la Iglesia de Oxapampa, principales casas típicas y el Paseo de los Colonos.', '07:30:00', '20:30:00', 220),
+(1003, '9,10,11,12,13', 'Puente Kimiri - Catarat de Bayoz – Velo de la Novia', 'Iniciamos nuestro recorrido, apreciando el Perfil del Nativo Dormido. puente colgante Victoria. Cataratas de Bayoz, Catarata Velo de la Novia, Cañon de Yurinaki, Puerto paseo en bote. Planta Procesadora de Café (degustación y compra).', '09:30:00', '20:30:00', 250);
 
 -- --------------------------------------------------------
 
@@ -111,7 +133,6 @@ CREATE TABLE IF NOT EXISTS `tbl_paqtour` (
 -- Estructura de tabla para la tabla `tbl_reserva`
 --
 
-DROP TABLE IF EXISTS `tbl_reserva`;
 CREATE TABLE IF NOT EXISTS `tbl_reserva` (
   `reserva_id` int(11) NOT NULL AUTO_INCREMENT,
   `paqtour_id` int(11) NOT NULL,
@@ -126,7 +147,6 @@ CREATE TABLE IF NOT EXISTS `tbl_reserva` (
 -- Estructura de tabla para la tabla `tbl_turista`
 --
 
-DROP TABLE IF EXISTS `tbl_turista`;
 CREATE TABLE IF NOT EXISTS `tbl_turista` (
   `turista_id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_documento` varchar(64) NOT NULL,
@@ -145,7 +165,6 @@ CREATE TABLE IF NOT EXISTS `tbl_turista` (
 -- Estructura de tabla para la tabla `tbl_usuario`
 --
 
-DROP TABLE IF EXISTS `tbl_usuario`;
 CREATE TABLE IF NOT EXISTS `tbl_usuario` (
   `usuario_id` int(11) NOT NULL AUTO_INCREMENT,
   `cargo_id` int(11) NOT NULL,
