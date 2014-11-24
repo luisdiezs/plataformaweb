@@ -6,6 +6,8 @@
 package model;
 
 import controller.login;
+import classes.Paqtur;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -19,15 +21,15 @@ import javax.servlet.http.HttpSession;
  *
  * @author ldiez
  */
-public class mgeneral {
+public class Login {
     
-    Connection cn;
-    Statement st;
-    ResultSet rs;
-    
-    public void conectar()
+    public String login(String user, String pass, HttpServletRequest request)
     {
-        try {            
+        Connection cn;
+        Statement st;
+        ResultSet rs;
+        String response;
+        try {
             ResourceBundle configDB = ResourceBundle.getBundle("configDB");
             String str_cn = "jdbc:mysql://" + configDB.getString("hostname");
             str_cn += ":" + configDB.getString("port");
@@ -39,15 +41,6 @@ public class mgeneral {
             cn = DriverManager.getConnection(str_cn, username, password);
             st = cn.createStatement();
             
-        } catch(SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public String login(String user, String pass, HttpServletRequest request)
-    {
-        String response;
-        try {
             rs = st.executeQuery("select * from tbl_usuario where usuario = '" + user + "' limit 1");
             rs.first();
             String usuario = rs.getString("nombre") + rs.getString("apellido");
@@ -61,6 +54,10 @@ public class mgeneral {
             }
             else
                 response = "0";
+            
+            rs.close();
+            st.close();
+            cn.close();
         
         } catch(SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);

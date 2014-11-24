@@ -337,7 +337,7 @@ content: "\f054";
 }
 
 /*sky form fixed*/
-form.sky-form{width: 960px; margin: 0 auto;}
+/*form.sky-form{width: 960px; margin: 0 auto;}*/
 .icon-ndoc:before {content: "#";}
 .icon-edad:before {content: "\f007+";}
 .sky-form .paqtur select {height: auto;}

@@ -13,7 +13,7 @@
     <!-- datepicker -->
     <script src="/<% out.print(config_motor.getString("base_path")); %>/assets/js/jquery-ui.js"></script>
     </head>
-    <body id="reservas pt0">
+    <body id="reservas" class="pt0">
         <%@ include file="/WEB-INF/views/header.jsp" %>
         
         <div class="content">
@@ -334,17 +334,22 @@
 					<div class="row">
 						<section class="col col-6">
 							<label class="select paqtur">
+                                                            <%@ page import = "classes.Paqtur"%> 
+                                                            <%@ page import = "model.ConsultasDB"%> 
+                                                            <%@ page import = "java.util.LinkedList"%>
+                                                            <% LinkedList<Paqtur> listPaqtur = ConsultasDB.getPaqtur(); %>
+                                                            <% out.println(listPaqtur); %>
 								<select id="select_paqtur" size="5">
 									<option value="0" disabled="">Paquete Turístico</option>
+                                                                        <%/*
+                                                                        for(int i = 0; i < listPaqtur.size(); i++)
+                                                                        {
+                                                                            out.println("<option value='" + listPaqtur.getCodigo(i) + "'>" + listPaqtur.getNombre(i) + "</option>");
+                                                                        }*/
+                                                                        %>
 									<option value="paq1">Paq1</option>
 									<option value="paq2">Paq2</option>
 									<option value="paq3">Paq3</option>
-									<option value="paq4">Paq4</option>
-									<option value="paq5">Paq5</option>
-									<option value="paq6">Paq6</option>
-									<option value="paq7">Paq7</option>
-									<option value="paq8">Paq8</option>
-									<option value="paq9">Paq9</option>
 								</select>
 							</label>
 						</section>

@@ -725,5 +725,5 @@ footer a:hover {
     outline: medium none;
 }
 
-body#home {width: 500px;margin: 0 auto;}
-body#reservas {width: 960px;margin: 0 auto;}
+body#home .content {width: 500px;margin: 0 auto;}
+body#reservas .content {width: 960px;margin: 0 auto;}

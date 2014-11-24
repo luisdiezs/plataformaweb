@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.mgeneral;
+import model.Login;
 
 /**
  *
@@ -35,8 +35,7 @@ public class login extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
                     
-            mgeneral db = new mgeneral();
-            db.conectar();
+            Login db = new Login();
 
             String user = "", pass = "", msg_error_usr = "", msg_error_pwd = "";
             
