@@ -332,32 +332,35 @@
 				
 				<fieldset>
 					<div class="row">
-						<section class="col col-6">
-							<label class="select paqtur">
-                                                            <%@ page import = "classes.Paqtur"%> 
-                                                            <%@ page import = "model.ConsultasDB"%> 
-                                                            <%@ page import = "java.util.LinkedList"%>
-                                                            <% LinkedList<Paqtur> listPaqtur = ConsultasDB.getPaqtur(); %>
-                                                            <% out.println(listPaqtur); %>
-								<select id="select_paqtur" size="5">
-									<option value="0" disabled="">Paquete Turístico</option>
-                                                                        <%/*
-                                                                        for(int i = 0; i < listPaqtur.size(); i++)
-                                                                        {
-                                                                            out.println("<option value='" + listPaqtur.getCodigo(i) + "'>" + listPaqtur.getNombre(i) + "</option>");
-                                                                        }*/
-                                                                        %>
-									<option value="paq1">Paq1</option>
-									<option value="paq2">Paq2</option>
-									<option value="paq3">Paq3</option>
-								</select>
-							</label>
-						</section>
-						<section class="col col-6">
-							<label class="select paqtur">
-								<div id="desc_paqtur"></div>
-							</label>
-						</section>
+                                            <section class="col col-6">
+                                                <label class="select paqtur">
+                                                    <%@ page import = "classes.Paqtur"%> 
+                                                    <%@ page import = "model.ConsultasDB"%> 
+                                                    <%@ page import = "java.util.LinkedList"%>
+                                                    <% LinkedList<Paqtur> listPaqtur = ConsultasDB.getPaqtur(); %>
+                                                    <select id="select_paqtur" size="5">
+                                                        <option value="0" disabled="">Paquete Turístico</option>
+                                                        <script>var paqtur = new Array(<%= listPaqtur.size() %>);</script>
+                                                        <%
+                                                        for(int i = 0; i < listPaqtur.size(); i++)
+                                                        {
+                                                            out.println("<script>"
+                                                                + "paqtur[" + i + "] = {"
+                                                                + "Descripcion: \"" + listPaqtur.get(i).getDescripcion() + "\","
+                                                                + "Horario: \"" + listPaqtur.get(i).getHorario() + "\","
+                                                                + "Precio: \"" + listPaqtur.get(i).getPrecio() + "\","
+                                                                + "};</script>");
+                                                            out.println("<option data-i='" + i + "' value='" + listPaqtur.get(i).getCodigo() + "'>" + listPaqtur.get(i).getNombre() + "</option>");
+                                                        }
+                                                        %>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-6">
+                                                    <label class="select paqtur">
+                                                            <div id="desc_paqtur"></div>
+                                                    </label>
+                                            </section>
 					</div>
 
 					<div class="row">
@@ -376,6 +379,22 @@
 			</form>
 		</div>
         
+                <script>
+                    $(function() {
+                        $( "#datepicker" ).datepicker();
+                    });
+
+                    $("#select_paqtur").change(function(){
+                        var desc_paqtur;
+                        var selected = $(this).find('option:selected');
+                        var _i = selected.data('i');
+                        desc_paqtur = '<div><ul><li><strong>Código: </strong>' + $(this).val() + '</li>';
+                        desc_paqtur += '<li><strong>Descripción: </strong>' + paqtur[_i]["Descripcion"] + '</li>';
+                        desc_paqtur += '<li><strong>Horario: </strong>' + paqtur[_i]["Horario"] + '</li>';
+                        desc_paqtur += '<li><strong>Precio:</strong>' + paqtur[_i]["Precio"] + '</li></ul></div>';
+                        $("#desc_paqtur").html(desc_paqtur);
+                    });
+                </script>
         <%@ include file="/WEB-INF/views/footer_scripts.jsp" %>
 
     </body>

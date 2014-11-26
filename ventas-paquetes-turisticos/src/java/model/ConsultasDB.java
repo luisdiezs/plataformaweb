@@ -27,9 +27,9 @@ public class ConsultasDB {
     {
         Connection cn;
         Statement st;
-        ResultSet rs;
-    
+        ResultSet rs;    
         LinkedList<Paqtur> listPaqtur = new LinkedList<>();
+        
         try
         {
             ResourceBundle configDB = ResourceBundle.getBundle("configDB");
@@ -46,7 +46,6 @@ public class ConsultasDB {
             rs = st.executeQuery("select * from tbl_paqtur");
             while(rs.next())
             {
-                String nombre = rs.getString("nombre");
                 Paqtur paqtur = new Paqtur();
                 paqtur.setCodigo(rs.getInt("paqtur_id"));
                 paqtur.setNombre(rs.getString("nombre"));
