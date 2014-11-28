@@ -11,14 +11,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import model.ConsultasDB;
+
+import classes.Reservas;
 
 /**
  *
  * @author ldiez
  */
-public class login extends HttpServlet {
+public class reservas extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,34 +35,19 @@ public class login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-                    
+            
+            Reservas reservas = new Reservas();
+            reservas.setNombres(request.getParameter("nombres"));
+            reservas.setApellidos(request.getParameter("apellidos"));
+            reservas.setTipodoc(request.getParameter("tipo_doc"));
+            reservas.setNrodoc(request.getParameter("nro_doc"));
+            reservas.setNacionalidad(request.getParameter("nacionalidad"));
+            reservas.setEdad(Integer.parseInt(request.getParameter("edad")));
+            reservas.setPaqtur(Integer.parseInt(request.getParameter("paq_tur")));
+            
+            request.setAttribute("reservas", reservas);
             ConsultasDB db = new ConsultasDB();
-
-            String user = "", pass = "", msg_error_usr = "", msg_error_pwd = "";
-            
-            if(request.getParameter("signin") != null)
-            {
-                user = request.getParameter("user");
-                pass = request.getParameter("pass");
-            }
-            
-            String response_login = db.login(user, pass, request);            
-            switch (response_login)
-            {
-                case "-1":
-                    msg_error_usr = "USUARIO no existe";
-                    request.setAttribute("msg_error_usr", msg_error_usr);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                    break;
-                case "0":
-                    msg_error_pwd = "CLAVE incorrecta";
-                    request.setAttribute("msg_error_pwd", msg_error_pwd);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                    break;
-                case "1":
-                    response.sendRedirect("reservas.jsp");
-                    break;
-            }
+            db.reservas(request);
         }
     }
 

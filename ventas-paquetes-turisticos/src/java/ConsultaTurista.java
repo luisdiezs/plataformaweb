@@ -3,22 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import model.ConsultasDB;
 
 /**
  *
  * @author ldiez
  */
-public class login extends HttpServlet {
+public class ConsultaTurista extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,37 +31,17 @@ public class login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-                    
+            String tipo_doc = request.getParameter("tipo_doc");
+            String nro_doc = request.getParameter("nro_doc");
+            
+            request.setAttribute("tipo_doc", tipo_doc);
+            request.setAttribute("nro_doc", nro_doc);
             ConsultasDB db = new ConsultasDB();
-
-            String user = "", pass = "", msg_error_usr = "", msg_error_pwd = "";
-            
-            if(request.getParameter("signin") != null)
-            {
-                user = request.getParameter("user");
-                pass = request.getParameter("pass");
-            }
-            
-            String response_login = db.login(user, pass, request);            
-            switch (response_login)
-            {
-                case "-1":
-                    msg_error_usr = "USUARIO no existe";
-                    request.setAttribute("msg_error_usr", msg_error_usr);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                    break;
-                case "0":
-                    msg_error_pwd = "CLAVE incorrecta";
-                    request.setAttribute("msg_error_pwd", msg_error_pwd);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                    break;
-                case "1":
-                    response.sendRedirect("reservas.jsp");
-                    break;
-            }
+            db.getTurista(request);
         }
     }
-
+    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

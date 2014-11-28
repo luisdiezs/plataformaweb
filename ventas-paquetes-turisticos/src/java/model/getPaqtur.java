@@ -5,31 +5,33 @@
  */
 package model;
 
-import controller.login;
 import classes.Paqtur;
-
+import controller.login;
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.sql.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.LinkedList;
+import java.util.ResourceBundle;
 
 /**
  *
  * @author ldiez
  */
-public class Login {
+public class getPaqtur {
     
-    public String login(String user, String pass, HttpServletRequest request)
+    public static LinkedList<Paqtur> getPaqtur()
     {
         Connection cn;
         Statement st;
-        ResultSet rs;
-        String response;
-        try {
+        ResultSet rs;    
+        LinkedList<Paqtur> listPaqtur = new LinkedList<>();
+        
+        try
+        {
             ResourceBundle configDB = ResourceBundle.getBundle("configDB");
             String str_cn = "jdbc:mysql://" + configDB.getString("hostname");
             str_cn += ":" + configDB.getString("port");
@@ -41,30 +43,26 @@ public class Login {
             cn = DriverManager.getConnection(str_cn, username, password);
             st = cn.createStatement();
             
-            rs = st.executeQuery("select * from tbl_usuario where usuario = '" + user + "' limit 1");
-            rs.first();
-            String usuario = rs.getString("nombre") + rs.getString("apellido");
-            
-            HttpSession session = request.getSession(true);
-            
-            if(pass.equals(rs.getString("clave")))
+            rs = st.executeQuery("select * from tbl_paqtur");
+            while(rs.next())
             {
-                response = "1";
-                session.setAttribute("usuario", usuario);
+                Paqtur paqtur = new Paqtur();
+                paqtur.setCodigo(rs.getInt("paqtur_id"));
+                paqtur.setNombre(rs.getString("nombre"));
+                paqtur.setDescripcion(rs.getString("descripcion"));
+                paqtur.setHorario(rs.getString("hora_inicio") + "hrs - " + rs.getString("hora_fin") + "hrs");
+                paqtur.setPrecio(rs.getInt("precio"));
+                listPaqtur.add(paqtur);
             }
-            else
-                response = "0";
             
             rs.close();
             st.close();
             cn.close();
-        
-        } catch(SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-            response = "-1";
         }
-        
-        return response;
+        catch (SQLException ex)
+        {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listPaqtur;
     }
-    
 }
