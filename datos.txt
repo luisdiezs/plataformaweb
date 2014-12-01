@@ -1,0 +1,5 @@
+usario_db = plataformaweb
+clave_db = tQNxS38JPPf8Fcw9
+
+usuario_sistema = admin
+clave_sistema = 1234
