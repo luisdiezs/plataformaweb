@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.ConsultasDB;
+import org.json.simple.*;
+
+import classes.*;
 
 /**
  *
@@ -31,13 +34,23 @@ public class ConsultaTurista extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String tipo_doc = request.getParameter("tipo_doc");
-            String nro_doc = request.getParameter("nro_doc");
             
-            request.setAttribute("tipo_doc", tipo_doc);
-            request.setAttribute("nro_doc", nro_doc);
-            ConsultasDB db = new ConsultasDB();
-            db.getTurista(request);
+            if(request.getParameter("tipo_doc") != null && request.getParameter("nro_doc") != null)
+            {
+                String tipo_doc = request.getParameter("tipo_doc");
+                String nro_doc = request.getParameter("nro_doc");
+
+                request.setAttribute("tipo_doc", tipo_doc);
+                request.setAttribute("nro_doc", nro_doc);
+                ConsultasDB db = new ConsultasDB();
+                db.getTurista(request);
+
+                out.println(request.getAttribute("turista"));
+                out.flush();
+            } else {
+                response.sendRedirect("reservas.jsp");
+            }
+            
         }
     }
     

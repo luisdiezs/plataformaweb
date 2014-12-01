@@ -51,6 +51,6 @@
 				</footer>
 			</form>
 		</div>
-        
+        <%@ include file="/WEB-INF/views/footer_scripts.jsp" %>
     </body>
 </html>

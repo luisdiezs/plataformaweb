@@ -340,5 +340,8 @@ content: "\f054";
 /*form.sky-form{width: 960px; margin: 0 auto;}*/
 .icon-ndoc:before {content: "#";}
 .icon-edad:before {content: "\f007+";}
+.icon-acuenta:before {content: "S/.";}
 .sky-form .paqtur select {height: auto;}
 .sky-form .select i {pointer-events: none;}
+.msg_error {color: #A52A2A;}
+#saldo{margin-top: 5px;}

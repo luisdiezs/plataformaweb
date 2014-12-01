@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import model.ConsultasDB;
 
 import classes.Reservas;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -42,12 +44,21 @@ public class reservas extends HttpServlet {
             reservas.setTipodoc(request.getParameter("tipo_doc"));
             reservas.setNrodoc(request.getParameter("nro_doc"));
             reservas.setNacionalidad(request.getParameter("nacionalidad"));
+            reservas.setFecha(request.getParameter("fecha"));
+            reservas.setAcuenta(Double.parseDouble(request.getParameter("acuenta")));
+            reservas.setSaldo(Double.parseDouble(request.getParameter("saldo")));
             reservas.setEdad(Integer.parseInt(request.getParameter("edad")));
             reservas.setPaqtur(Integer.parseInt(request.getParameter("paq_tur")));
             
             request.setAttribute("reservas", reservas);
             ConsultasDB db = new ConsultasDB();
-            db.reservas(request);
+            db.setTurista(request);
+            db.setReserva(request);
+            db.setBoleto(request);
+            response.sendRedirect("reservas.jsp");
+        } catch (Exception ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Hubo un error al procesar tus datos. \npor favor vuelve a intentarlo");
         }
     }
 

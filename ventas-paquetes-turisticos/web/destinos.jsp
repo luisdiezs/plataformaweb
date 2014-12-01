@@ -13,9 +13,9 @@
         <%@ include file="/WEB-INF/views/common/menu.jsp" %>
         <div class="container demo-2">
             <header class="clearfix">
-                <h1>Destinos<span>Space-saving drop-down menu with subtle effects</span></h1>
+                <h1>Destinos</h1>
             </header>
         </div><!-- /container -->
-        <%@ include file="/WEB-INF/views/common/footer_scripts.jsp" %>
+        <%@ include file="/WEB-INF/views/footer_scripts.jsp" %>
     </body>
 </html>

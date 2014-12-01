@@ -11,7 +11,8 @@ package classes;
  */
 public class Reservas {
     String nombres, apellidos, tipo_doc, nro_doc, fecha, nacionalidad;
-    int edad, paqtur;
+    double acuenta, saldo;
+    int edad, paqtur, turistaid, reservaid;
     
     public String getNombres() {
             return nombres;
@@ -55,6 +56,20 @@ public class Reservas {
             this.fecha = fecha;
     }
     
+    public double getAcuenta() {
+            return acuenta;
+    }
+    public void setAcuenta(double acuenta) {
+            this.acuenta = acuenta;
+    }
+    
+    public double getSaldo() {
+            return saldo;
+    }
+    public void setSaldo(double saldo) {
+            this.saldo = saldo;
+    }
+    
     public int getEdad() {
             return edad;
     }
@@ -67,6 +82,20 @@ public class Reservas {
     }
     public void setPaqtur(int paqtur) {
             this.paqtur = paqtur;
+    }
+    
+    public int getTuristaid() {
+            return turistaid;
+    }
+    public void setTuristaid(int turistaid) {
+            this.turistaid = turistaid;
+    }
+    
+    public int getReservaid() {
+            return reservaid;
+    }
+    public void setReservaid(int reservaid) {
+            this.reservaid = reservaid;
     }
     
 }
